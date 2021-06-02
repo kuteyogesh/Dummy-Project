@@ -1,0 +1,23 @@
+declare
+    TYPE t1 is table of varchar2(30) index by binary_integer;
+    cursor c1 is
+      select first_name, salary, last_name from hr.employees;
+  
+    v_t1 t1;
+    v_t2 t1;
+    v_t3 t1;
+  begin
+    open c1;
+  
+    fetch c1 bulk collect
+      into v_t1, v_t2, v_t3;
+  
+    for i in v_t2.first .. v_t2.last loop
+      dbms_output.put_line(v_t1(i) || '   ' || v_t2(i) || '    ' ||
+                           v_t3(i));
+    
+    end loop;
+  
+    close c1;
+  
+  end;
