@@ -1,0 +1,14 @@
+declare
+cursor c1 is select * from hr.employees;
+i c1%rowtype;
+begin
+ open c1;
+ loop
+   fetch c1  into  i;
+   exit when c1%notfound;
+   if c1%rowcount<=10 then
+     dbms_output.put_line(i.first_name);
+     end if;
+     end loop;
+     close c1;
+     end;
